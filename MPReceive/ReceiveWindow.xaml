@@ -3,10 +3,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:MPReceive"
         mc:Ignorable="d"
-        Title="Receive Window" Height="450" Width="800">
+        Title="MergePro Mock-up" Height="450" Width="800"
+        FontSize="18">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>            
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Row="1" Grid.Column="1" LastChildFill="False" >
+            <CheckBox DockPanel.Dock="Left"
+                Content="Listening" 
+                VerticalContentAlignment="Center"
+                Margin="20 10 0 10"
+                IsChecked="{Binding IsListening}"/>
+            <xctk:IntegerUpDown 
+                Value="{Binding Interval}"
+                Width="70"
+                TextAlignment="Center"
+                DockPanel.Dock="Right"
+                Margin="20 0"/>
+            
+            <TextBlock DockPanel.Dock="Right" Text="Interval:" VerticalAlignment="Center"/>
+        </DockPanel>
+        <ScrollViewer
+            Grid.Row="2" Grid.Column="1">
+            <Border BorderBrush="Black" BorderThickness="1">
+                <TextBlock  Text="{Binding Events}" />                
+            </Border>
+        </ScrollViewer>
 
     </Grid>
 </Window>

@@ -18,9 +18,12 @@ namespace MPReceive
   
     public partial class ReceiveWindow : Window
     {
+        private ReceiveWindowVM VM;
         public ReceiveWindow()
         {
             InitializeComponent();
+            VM = new ReceiveWindowVM();
+            DataContext = VM;
         }
     }
 }
