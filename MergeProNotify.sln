@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPSend", "MergeProNotify\MPSend.csproj", "{3F951278-1724-4474-9A56-13F20F1DCA8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPReceive", "MPReceive\MPReceive.csproj", "{ADBABF0B-9F07-4021-B8A4-079BE3D4CC62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F951278-1724-4474-9A56-13F20F1DCA8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F951278-1724-4474-9A56-13F20F1DCA8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F951278-1724-4474-9A56-13F20F1DCA8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F951278-1724-4474-9A56-13F20F1DCA8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADBABF0B-9F07-4021-B8A4-079BE3D4CC62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADBABF0B-9F07-4021-B8A4-079BE3D4CC62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADBABF0B-9F07-4021-B8A4-079BE3D4CC62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADBABF0B-9F07-4021-B8A4-079BE3D4CC62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18A647A7-BDB6-4546-93D2-55B8EA5469C1}
+	EndGlobalSection
+EndGlobal
