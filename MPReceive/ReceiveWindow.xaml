@@ -6,8 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:MPReceive"
         mc:Ignorable="d"
-        Title="MergePro Mock-up" Height="450" Width="800"
-        FontSize="18">
+        Title="MergePro Mock-up" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -28,7 +27,7 @@
                 IsChecked="{Binding IsListening}"/>
             <xctk:IntegerUpDown 
                 Value="{Binding Interval}"
-                Width="70"
+                Width="70" Height="25"
                 TextAlignment="Center"
                 DockPanel.Dock="Right"
                 Margin="20 0"/>
