@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
+using System.IO;
 using System.Windows.Threading;
 
 namespace MPReceive
@@ -71,7 +72,7 @@ namespace MPReceive
 
                 string? filename = LookForFile();
 
-                if(filename !=null && filename.Length > 0)
+                if(!string.IsNullOrEmpty(filename))
                 {
                     Log("Found " + filename);
                     ProcessFile(filename);
@@ -88,12 +89,12 @@ namespace MPReceive
             
             //rename file
             string newFileName = filename.Substring(0, filename.Length - 3)+"cba";
-            System.IO.File.Move(filename, newFileName);
+            File.Move(filename, newFileName);
         }
 
         private string? LookForFile()
         {
-            string[] files = System.IO.Directory.GetFiles(PATH,PATTERN);
+            string[] files = Directory.GetFiles(PATH,PATTERN);
             if(files.Length > 0)
             {
                 return files[0];
