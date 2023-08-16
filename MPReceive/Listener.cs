@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,8 +18,8 @@ namespace MPReceive
         public Listener( Action callback, int port = 12344)
         {
             Callback = callback;
-            _listener = new TcpListener(IPAddress.Any, 12344);
-            _listener.Start();
+            _listener = new TcpListener(IPAddress.Any, port);
+           
 
             new Thread(async () =>
             {
@@ -35,7 +31,6 @@ namespace MPReceive
                         await ProcessClient(client);
                         client.Close();
                         client.Dispose();
-
                     }
                     else
                     {
@@ -61,7 +56,6 @@ namespace MPReceive
                 }
             }
 
-
         }
 
         public void Kill()
@@ -79,11 +73,8 @@ namespace MPReceive
             isListening = true; 
         }
         public void Stop() { 
-            _listener?.Stop();
+            _listener.Stop();
             isListening = false;
         }
-
-
-
     }
 }
