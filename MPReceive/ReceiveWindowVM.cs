@@ -21,7 +21,7 @@ namespace MPReceive
 
         private bool _processing = false;
 
-        private readonly string PATH = @"c:\tmp\";
+        private readonly string PATH = @"\\172.16.2.1\office\mfc\";
         private readonly string PATTERN = @"*.abc";
 
         public ReceiveWindowVM()

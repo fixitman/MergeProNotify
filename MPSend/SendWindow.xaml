@@ -20,11 +20,19 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Row="1" Grid.Column="1" LastChildFill="False" >
-            <CheckBox DockPanel.Dock="Left"
+            <StackPanel DockPanel.Dock="Left" 
+                        Orientation="Horizontal" Margin="0 0 0 10">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="IP" VerticalContentAlignment="Center"/>
+                    <TextBox Text="{Binding IP}" Width="100" Height="25"/>
+                </StackPanel>
+            <CheckBox 
                 Content="Notifying" 
                 VerticalContentAlignment="Center"
                 Margin="20 10 0 10"
                 IsChecked="{Binding IsNotifying}"/>
+            </StackPanel>
+            
             <Button Content="CreateFile"
                 Command="{Binding CreateFileCommand}"    
                 DockPanel.Dock="Right"

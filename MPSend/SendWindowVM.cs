@@ -20,10 +20,10 @@ namespace MPReceive
 		[ObservableProperty]
 		private bool isNotifying = false;
 
-        private bool _processing = false;
+        [ObservableProperty]
+        private string iP = "172.16.101.199";
 
-        private readonly string PATH = @"c:\tmp\";
-        private readonly string PATTERN = @"*.abc";
+        private readonly string PATH = @"\\172.16.2.1\office\mfc\";
 
         
 
@@ -64,7 +64,7 @@ namespace MPReceive
         private async Task  NotifyFileCreated()
         {
             using var client = new TcpClient();
-            await client.ConnectAsync("172.16.101.199", 12344);
+                await client.ConnectAsync(IP, 12344);
             using var stream = client.GetStream();
             using var writer = new StreamWriter(stream);
             await writer.WriteLineAsync("CHECK NOW");
