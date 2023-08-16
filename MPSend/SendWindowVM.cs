@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,15 @@ namespace MPReceive
         private string iP = "172.16.101.199";
 
         private readonly string PATH = @"\\172.16.2.1\office\mfc\";
-        
+
+        public SendWindowVM()
+        {
+            var _ip = GetLocalIPAddress();
+            if (!string.IsNullOrEmpty(_ip) )
+            {
+                IP = _ip;
+            }
+        }
 
         [RelayCommand]
         private async Task CreateFile()
@@ -58,13 +67,14 @@ namespace MPReceive
 
         private async Task NotifyFileCreated()
         {           
-                using var client = new TcpClient();
-                await client.ConnectAsync(IP, 12344);
-                using var stream = client.GetStream();
-                using var writer = new StreamWriter(stream);
-                await writer.WriteLineAsync("CHECK NOW");
-                await writer.FlushAsync();
-                writer.Close();     
+            using var client = new TcpClient();
+            client.SendTimeout = 1000;
+            await client.ConnectAsync(IP, 12344);
+            using var stream = client.GetStream();
+            using var writer = new StreamWriter(stream);
+            await writer.WriteLineAsync("CHECK NOW");
+            await writer.FlushAsync();
+            writer.Close();     
         }
 
         partial void OnIsNotifyingChanged(bool value)
@@ -72,6 +82,19 @@ namespace MPReceive
             var notifyStatus = value ? "On" : "Off";
             Log(string.Format("Notification is {0}", notifyStatus));
            
+        }
+
+        private string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address!");
         }
 
         private void Log(string _event)
