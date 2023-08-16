@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.IO;
-using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +11,6 @@ namespace MPReceive
 {
     internal partial class SendWindowVM: ObservableObject
     {
-       
-
 		[ObservableProperty]
 		private string events = "";
 
@@ -24,13 +21,7 @@ namespace MPReceive
         private string iP = "172.16.101.199";
 
         private readonly string PATH = @"\\172.16.2.1\office\mfc\";
-
         
-
-        public SendWindowVM()
-        {
-           
-        }
 
         [RelayCommand]
         private async Task CreateFile()
@@ -41,36 +32,39 @@ namespace MPReceive
                 .Append(".abc")
                 .ToString();
             Log("Creating File " + newFileName);
-            var f = System.IO.File.Create(newFileName);
-            f.Close();
+            try
+            {
+                var f = File.Create(newFileName);
+                f.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("File IO error - " + e.Message);
+            }
 
-            if(isNotifying )
+            if(IsNotifying )
             {
                 try
                 {
                     Log("Notifying");
-                    await NotifyFileCreated();
-                    
+                    await NotifyFileCreated();                    
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show("Notify error - " + e.Message);
                 }
             }
-
-
         }
 
-        private async Task  NotifyFileCreated()
-        {
-            using var client = new TcpClient();
+        private async Task NotifyFileCreated()
+        {           
+                using var client = new TcpClient();
                 await client.ConnectAsync(IP, 12344);
-            using var stream = client.GetStream();
-            using var writer = new StreamWriter(stream);
-            await writer.WriteLineAsync("CHECK NOW");
-            await writer.FlushAsync();
-            writer.Close();
-            
+                using var stream = client.GetStream();
+                using var writer = new StreamWriter(stream);
+                await writer.WriteLineAsync("CHECK NOW");
+                await writer.FlushAsync();
+                writer.Close();     
         }
 
         partial void OnIsNotifyingChanged(bool value)
@@ -80,10 +74,10 @@ namespace MPReceive
            
         }
 
-        private void Log(string _log)
+        private void Log(string _event)
         {
             var time = DateTime.Now.ToLongTimeString();
-            Events = string.Format("{0} - {1}\r\n{2}", time, _log, Events);
+            Events = string.Format("{0} - {1}\r\n{2}", time, _event, Events);
 
         }
     }
